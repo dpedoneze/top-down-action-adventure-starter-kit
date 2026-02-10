@@ -38,7 +38,7 @@ jobs:
         run: |
           mkdir -p addons
           cd addons
-          curl -L -o gut.zip "https://github.com/bitwes/Gut/releases/download/v${{ env.GUT_VERSION }}/gut-${{ env.GUT_VERSION }}.zip"
+          curl -L -o gut.zip "https://github.com/bitwes/Gut/archive/refs/tags/v${{ env.GUT_VERSION }}.zip"
           unzip -q gut.zip
           rm gut.zip
           # The zip extracts to a folder named 'gut-X.X.X/addons/gut', we need to move it
