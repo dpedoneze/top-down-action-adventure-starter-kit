@@ -53,7 +53,18 @@ godot --headless -s addons/gut/gut_cmdln.gd -gdir=res://tests/unit -gexit -glog=
 
 ### CI/CD Integration
 
-For GitHub Actions or other CI systems:
+This repository includes a GitHub Actions workflow (`.github/workflows/tests.yml`) that automatically runs tests on:
+- Push to `main` or `master` branches
+- Pull requests targeting `main` or `master` branches
+- Manual workflow dispatch
+
+The workflow:
+1. Sets up Godot 4.5 using `chickensoft-games/setup-godot` action
+2. Downloads and installs the GUT addon
+3. Imports the Godot project
+4. Runs all unit tests
+
+For other CI systems, use:
 
 ```yaml
 - name: Run Tests
@@ -61,7 +72,7 @@ For GitHub Actions or other CI systems:
     godot --headless -s addons/gut/gut_cmdln.gd \
       -gdir=res://tests/unit \
       -gexit \
-      -gexit_on_success
+      -glog=1
 ```
 
 ## Writing Tests
