@@ -41,10 +41,10 @@ jobs:
           curl -L -o gut.zip "https://github.com/bitwes/Gut/archive/refs/tags/v${{ env.GUT_VERSION }}.zip"
           unzip -q gut.zip
           rm gut.zip
-          # The zip extracts to a folder named 'gut-X.X.X/addons/gut', we need to move it
-          if [ -d "gut-${{ env.GUT_VERSION }}" ]; then
-            mv "gut-${{ env.GUT_VERSION }}/addons/gut" ./
-            rm -rf "gut-${{ env.GUT_VERSION }}"
+          # The zip extracts to a folder named 'Gut-X.X.X/addons/gut' (capital G), we need to move it
+          if [ -d "Gut-${{ env.GUT_VERSION }}" ]; then
+            mv "Gut-${{ env.GUT_VERSION }}/addons/gut" ./
+            rm -rf "Gut-${{ env.GUT_VERSION }}"
           fi
 
       - name: Verify GUT installation
