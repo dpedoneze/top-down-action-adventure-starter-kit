@@ -72,6 +72,7 @@ For other CI systems, use:
     godot --headless -s addons/gut/gut_cmdln.gd \
       -gdir=res://tests/unit \
       -gexit \
+      -gexit_on_success \
       -glog=1
 ```
 
