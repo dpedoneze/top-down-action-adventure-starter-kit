@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 env:
-  GODOT_VERSION: "4.5"
+  GODOT_VERSION: "4.5.0" # should use m.m.p format
   GUT_VERSION: "9.3.0"
 
 jobs:
