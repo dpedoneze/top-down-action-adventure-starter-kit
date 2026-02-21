@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://2uwoed3yo2ra"]
+[gd_scene format=3 uid="uid://2uwoed3yo2ra"]
 
 [sub_resource type="GDScript" id="1"]
 script/source = "extends CanvasLayer
@@ -103,10 +103,10 @@ func add_position(object, scale, width, color):
 	positions.append(Position.new(object, scale, width, color))
 "
 
-[node name="DebugOverlay" type="CanvasLayer"]
+[node name="DebugOverlay" type="CanvasLayer" unique_id=126560723]
 script = SubResource("1")
 
-[node name="DebugDraw3D" type="Control" parent="."]
+[node name="DebugDraw3D" type="Control" parent="." unique_id=1743226444]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

@@ -1,0 +1,72 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+# Minimal permissions for security
+permissions:
+  contents: read
+
+env:
+  GODOT_VERSION: "4.5.0" # should use m.m.p format
+  GUT_VERSION: "9.3.0"
+
+jobs:
+  test:
+    name: Run GUT Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: ${{ env.GODOT_VERSION }}
+          use-dotnet: false
+          include-templates: false
+
+      - name: Verify Godot installation
+        run: godot --version
+
+      - name: Download GUT addon
+        run: |
+          mkdir -p addons
+          cd addons
+          curl -L -o gut.zip "https://github.com/bitwes/Gut/archive/refs/tags/v${{ env.GUT_VERSION }}.zip"
+          unzip -q gut.zip
+          rm gut.zip
+          # The zip extracts to a folder named 'Gut-X.X.X/addons/gut' (capital G), we need to move it
+          if [ -d "Gut-${{ env.GUT_VERSION }}" ]; then
+            mv "Gut-${{ env.GUT_VERSION }}/addons/gut" ./
+            rm -rf "Gut-${{ env.GUT_VERSION }}"
+          fi
+
+      - name: Verify GUT installation
+        run: ls -la addons/gut/
+
+      - name: Import Godot project
+        run: |
+          # Run Godot once to import the project and generate .godot folder
+          # Timeout is expected as import can hang; exit code 124 means timeout which is acceptable
+          timeout 60 godot --headless --import
+          exit_code=$?
+          if [ $exit_code -eq 124 ]; then
+            echo "Import timed out (expected behavior)"
+          elif [ $exit_code -ne 0 ]; then
+            echo "Import failed with exit code $exit_code"
+            exit $exit_code
+          fi
+
+      - name: Run GUT tests
+        run: |
+          godot --headless -s addons/gut/gut_cmdln.gd \
+            -gdir=res://tests/unit \
+            -gexit \
+            -gexit_on_success \
+            -glog=1
