@@ -70,7 +70,7 @@ window/size/window_height_override=540
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/dialogic/plugin.cfg")
+enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/gut/plugin.cfg")
 
 [file_customization]
 
@@ -79,6 +79,7 @@ folder_colors={
 "res://assets/": "orange",
 "res://characters/": "red",
 "res://scenes/": "blue",
+"res://tests/": "purple",
 "res://tools/": "yellow",
 "res://ui/": "green"
 }

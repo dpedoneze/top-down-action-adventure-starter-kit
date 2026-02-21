@@ -1,0 +1,22 @@
+{
+	"dirs": [
+		"res://tests/unit"
+	],
+	"double_strategy": "partial",
+	"font_color": "cccccc",
+	"font_name": "Default",
+	"font_size": 16,
+	"hide_orphans": false,
+	"ignore_pause": true,
+	"include_subdirs": true,
+	"inner_class": "",
+	"log_level": 1,
+	"opacity": 100,
+	"prefix": "test_",
+	"selected": "",
+	"should_exit": true,
+	"should_exit_on_success": false,
+	"should_maximize": false,
+	"suffix": ".gd",
+	"tests": []
+}
